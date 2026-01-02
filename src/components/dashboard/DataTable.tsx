@@ -72,7 +72,7 @@ export function DataTable<T>({
                   {columns.map((column) => (
                     <td
                       key={column.key}
-                      className={`px-6 py-4 whitespace-nowrap ${
+                      className={`px-6 py-4 ${column.className || ''} ${
                         column.hideOnMobile ? 'hidden md:table-cell' : ''
                       }`}
                     >

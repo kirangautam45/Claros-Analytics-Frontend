@@ -1,7 +1,12 @@
 import { useMemo, useState } from 'react'
 import { Header } from '@/components/Header'
 import { DataTable, SearchInput, Pagination } from '@/components/dashboard'
-import { LoadingSpinner, ErrorMessage, Modal, ConfirmDialog } from '@/components/common'
+import {
+  LoadingSpinner,
+  ErrorMessage,
+  Modal,
+  ConfirmDialog,
+} from '@/components/common'
 import { PostForm } from '@/components/forms'
 import { useDashboard } from '@/hooks'
 import type { Post } from '@/@types'
@@ -58,7 +63,11 @@ export function PostsPage() {
     setIsDeleteOpen(true)
   }
 
-  const handleFormSubmit = async (data: { title: string; body: string; userId: number }) => {
+  const handleFormSubmit = async (data: {
+    title: string
+    body: string
+    userId: number
+  }) => {
     try {
       if (selectedPost) {
         await handleUpdatePost({ ...data, id: selectedPost.id })
@@ -91,7 +100,7 @@ export function PostsPage() {
       className: 'w-16',
       hideOnMobile: true,
       render: (post: Post) => (
-        <span className="text-gray-400 font-mono text-xs">{post.id}</span>
+        <span className='text-gray-400 font-mono text-xs'>{post.id}</span>
       ),
     },
     {
@@ -100,31 +109,26 @@ export function PostsPage() {
       className: 'w-44',
       hideOnMobile: true,
       render: (post: Post) => (
-        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
-          {getUserName(post.userId)}
-        </span>
+        <span className='badge badge-info'>{getUserName(post.userId)}</span>
       ),
     },
     {
       key: 'title',
       header: 'Title',
+      className: 'w-1/3',
       render: (post: Post) => (
-        <div className="space-y-1">
-          <span className="font-semibold text-gray-900 line-clamp-1 first-letter:uppercase">
-            {post.title}
-          </span>
-          <span className="text-gray-500 text-xs line-clamp-2 leading-relaxed md:hidden first-letter:uppercase">
-            {post.body.substring(0, 80)}...
-          </span>
-        </div>
+        <span className='font-semibold text-gray-900 first-letter:uppercase wrap-break-word'>
+          {post.title}
+        </span>
       ),
     },
     {
       key: 'body',
       header: 'Content',
+      className: 'w-1/3',
       hideOnMobile: true,
       render: (post: Post) => (
-        <p className="text-gray-500 text-sm line-clamp-2 max-w-md leading-relaxed first-letter:uppercase">
+        <p className='text-gray-500 text-sm leading-relaxed first-letter:uppercase wrap-break-word'>
           {post.body}
         </p>
       ),
@@ -134,26 +138,20 @@ export function PostsPage() {
       header: 'Actions',
       className: 'w-28',
       render: (post: Post) => (
-        <div className="flex gap-1">
+        <div className='flex gap-1'>
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              openEditModal(post)
-            }}
-            className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-all duration-150 hover:scale-105"
-            title="Edit post"
+            onClick={() => openEditModal(post)}
+            className='p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-all duration-150 hover:scale-105'
+            title='Edit post'
           >
-            <Pencil className="w-4 h-4" />
+            <Pencil className='w-4 h-4' />
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              openDeleteModal(post)
-            }}
-            className="p-2 text-rose-600 hover:bg-rose-100 rounded-lg transition-all duration-150 hover:scale-105"
-            title="Delete post"
+            onClick={() => openDeleteModal(post)}
+            className='p-2 text-rose-600 hover:bg-rose-100 rounded-lg transition-all duration-150 hover:scale-105'
+            title='Delete post'
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className='w-4 h-4' />
           </button>
         </div>
       ),
@@ -161,26 +159,26 @@ export function PostsPage() {
   ]
 
   return (
-    <div className="flex flex-col h-screen">
-      <Header title="Posts" />
-      <div className="flex-1 p-6 overflow-auto">
-        <div className="max-w-7xl mx-auto space-y-6">
+    <div className='flex flex-col'>
+      <Header title='Posts' />
+      <div className='flex-1 p-6'>
+        <div className='max-w-7xl mx-auto space-y-6'>
           {/* Search and Add Button */}
-          <div className="flex flex-wrap gap-4 justify-between items-center">
+          <div className='flex flex-wrap gap-4 justify-between items-center'>
             <SearchInput
               value={postSearchTerm}
               onChange={handlePostSearch}
-              placeholder="Search posts..."
+              placeholder='Search posts...'
             />
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">
+            <div className='flex items-center gap-4'>
+              <span className='text-sm text-gray-500'>
                 {filteredPosts.length} posts found
               </span>
               <button
                 onClick={openCreateModal}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
               >
-                <Plus className="w-5 h-5" />
+                <Plus className='w-5 h-5' />
                 Add Post
               </button>
             </div>
@@ -188,16 +186,24 @@ export function PostsPage() {
 
           {/* Error State */}
           {error && (
-            <ErrorMessage error={error} onDismiss={handleClearError} onRetry={handleRetry} />
+            <ErrorMessage
+              error={error}
+              onDismiss={handleClearError}
+              onRetry={handleRetry}
+            />
           )}
 
           {/* Loading State */}
-          {isLoading && <LoadingSpinner size="lg" text="Loading posts..." />}
+          {isLoading && <LoadingSpinner size='lg' text='Loading posts...' />}
 
           {/* Table */}
           {!isLoading && !error && (
             <>
-              <DataTable data={paginatedPosts} columns={columns} keyField="id" />
+              <DataTable
+                data={paginatedPosts}
+                columns={columns}
+                keyField='id'
+              />
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
@@ -219,7 +225,7 @@ export function PostsPage() {
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         title={selectedPost ? 'Edit Post' : 'Create New Post'}
-        size="lg"
+        size='lg'
       >
         <PostForm
           post={selectedPost}
@@ -235,10 +241,10 @@ export function PostsPage() {
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
-        title="Delete Post"
+        title='Delete Post'
         message={`Are you sure you want to delete "${selectedPost?.title}"? This action cannot be undone.`}
-        confirmText="Delete"
-        variant="danger"
+        confirmText='Delete'
+        variant='danger'
         isLoading={operationLoading}
       />
     </div>

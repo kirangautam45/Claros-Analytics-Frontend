@@ -39,10 +39,16 @@ export function useDashboard() {
   const debouncedCommentSearch = useDebounce(commentSearchQuery, 300)
 
   useEffect(() => {
-    dispatch(fetchUsers())
-    dispatch(fetchPosts())
-    dispatch(fetchComments())
-  }, [dispatch])
+    if (users.length === 0) {
+      dispatch(fetchUsers())
+    }
+    if (posts.length === 0) {
+      dispatch(fetchPosts())
+    }
+    if (comments.length === 0) {
+      dispatch(fetchComments())
+    }
+  }, [dispatch, users.length, posts.length, comments.length])
 
   const filteredUsers = useMemo(
     () =>
