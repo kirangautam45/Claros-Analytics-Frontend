@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { MemoryRouter } from 'react-router-dom'
+import type { AxiosResponse } from 'axios'
 import Users from './Users'
 import userReducer from '../store/slices/userSlice'
 import postReducer from '../store/slices/postSlice'
@@ -10,6 +11,14 @@ import commentReducer from '../store/slices/commentSlice'
 import * as userApi from '../api/userApi'
 import * as postApi from '../api/postApi'
 import * as commentApi from '../api/commentApi'
+
+const createMockResponse = <T,>(data: T): AxiosResponse<T> => ({
+  data,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: { headers: {} } as AxiosResponse['config'],
+})
 
 vi.mock('../api/userApi', () => ({
   userApi: {
@@ -74,8 +83,13 @@ const renderWithProviders = (ui: React.ReactElement) => {
 describe('Users', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+<<<<<<< HEAD
     vi.mocked(postApi.postApi.getAll).mockResolvedValue({ data: [] } as any)
     vi.mocked(commentApi.commentApi.getAll).mockResolvedValue({ data: [] } as any)
+=======
+    vi.mocked(postApi.postApi.getAll).mockResolvedValue(createMockResponse([]))
+    vi.mocked(commentApi.commentApi.getAll).mockResolvedValue(createMockResponse([]))
+>>>>>>> 0e293d8 ( text fixed)
   })
 
   it('should render loading state initially', () => {
@@ -97,7 +111,11 @@ describe('Users', () => {
   })
 
   it('should render users table when data is loaded', async () => {
+<<<<<<< HEAD
     vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers } as any)
+=======
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue(createMockResponse(mockUsers))
+>>>>>>> 0e293d8 ( text fixed)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(screen.getByText('Leanne Graham')).toBeInTheDocument()
@@ -108,7 +126,11 @@ describe('Users', () => {
   })
 
   it('should render search input', async () => {
+<<<<<<< HEAD
     vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers } as any)
+=======
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue(createMockResponse(mockUsers))
+>>>>>>> 0e293d8 ( text fixed)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(
@@ -118,7 +140,11 @@ describe('Users', () => {
   })
 
   it('should show no users found when list is empty', async () => {
+<<<<<<< HEAD
     vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: [] } as any)
+=======
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue(createMockResponse([]))
+>>>>>>> 0e293d8 ( text fixed)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(screen.getByText('No users found')).toBeInTheDocument()
