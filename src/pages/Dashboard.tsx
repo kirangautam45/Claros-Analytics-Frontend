@@ -78,8 +78,8 @@ export function DashboardPage() {
       <Header title='Dashboard' />
       <div className='flex-1 p-3 sm:p-6 overflow-auto'>
         <div className='max-w-7xl mx-auto space-y-4 sm:space-y-6'>
-          {/* Dashboard Header with Welcome & Refresh */}
-          <DashboardHeader onRefresh={handleRetry} isLoading={isLoading} />
+          {/* Dashboard Header with Welcome */}
+          <DashboardHeader />
 
           {/* Stats Grid */}
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4'>

@@ -8,9 +8,11 @@ import Users from './Users'
 import userReducer from '../store/slices/userSlice'
 import postReducer from '../store/slices/postSlice'
 import commentReducer from '../store/slices/commentSlice'
+import todoReducer from '../store/slices/todoSlice'
 import * as userApi from '../api/userApi'
 import * as postApi from '../api/postApi'
 import * as commentApi from '../api/commentApi'
+import * as todoApi from '../api/todoApi'
 
 const createMockResponse = <T,>(data: T): AxiosResponse<T> => ({
   data,
@@ -34,6 +36,12 @@ vi.mock('../api/postApi', () => ({
 
 vi.mock('../api/commentApi', () => ({
   commentApi: {
+    getAll: vi.fn(),
+  },
+}))
+
+vi.mock('../api/todoApi', () => ({
+  todoApi: {
     getAll: vi.fn(),
   },
 }))
@@ -67,6 +75,7 @@ const createMockStore = () => {
       user: userReducer,
       post: postReducer,
       comment: commentReducer,
+      todo: todoReducer,
     },
   })
 }
@@ -85,6 +94,7 @@ describe('Users', () => {
     vi.clearAllMocks()
     vi.mocked(postApi.postApi.getAll).mockResolvedValue(createMockResponse([]))
     vi.mocked(commentApi.commentApi.getAll).mockResolvedValue(createMockResponse([]))
+    vi.mocked(todoApi.todoApi.getAll).mockResolvedValue(createMockResponse([]))
   })
 
   it('should render loading state initially', () => {
