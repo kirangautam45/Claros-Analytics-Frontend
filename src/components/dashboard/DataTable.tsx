@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export interface Column<T> {
   key: string
@@ -33,11 +33,11 @@ export function DataTable<T>({
   }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full">
+    <div className='bg-white rounded-lg border border-gray-200 overflow-hidden'>
+      <div className='overflow-x-auto'>
+        <table className='w-full'>
           <thead>
-            <tr className="border-b border-gray-200">
+            <tr className='border-b border-gray-200'>
               {columns.map((column) => (
                 <th
                   key={column.key}
@@ -55,7 +55,7 @@ export function DataTable<T>({
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-6 py-8 text-center text-gray-500"
+                  className='px-6 py-8 text-center text-gray-500'
                 >
                   {emptyMessage}
                 </td>
@@ -79,7 +79,7 @@ export function DataTable<T>({
                       {column.render ? (
                         column.render(item)
                       ) : (
-                        <span className="text-sm text-gray-600">
+                        <span className='text-sm text-gray-600'>
                           {String(getValue(item, column.key) ?? '')}
                         </span>
                       )}

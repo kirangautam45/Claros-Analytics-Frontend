@@ -58,14 +58,14 @@ export function Pagination({
   if (totalItems === 0) return null
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 py-4">
+    <div className='flex flex-col sm:flex-row items-center justify-between gap-4 px-2 py-4'>
       {/* Items per page selector */}
-      <div className="flex items-center gap-2 text-sm text-gray-600">
+      <div className='flex items-center gap-2 text-sm text-gray-600'>
         <span>Show</span>
         <select
           value={itemsPerPage}
           onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
-          className="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className='border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -76,18 +76,18 @@ export function Pagination({
       </div>
 
       {/* Page info */}
-      <div className="text-sm text-gray-600">
+      <div className='text-sm text-gray-600'>
         Showing {startItem} to {endItem} of {totalItems} results
       </div>
 
       {/* Page navigation */}
-      <div className="flex items-center gap-1">
+      <div className='flex items-center gap-1'>
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className='p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className='w-5 h-5' />
         </button>
 
         {pageNumbers().map((page, index) =>
@@ -95,7 +95,7 @@ export function Pagination({
             <button
               key={index}
               onClick={() => onPageChange(page)}
-              className={`min-w-[40px] h-10 rounded-lg font-medium transition-colors ${
+              className={`min-w-10 h-10 rounded-lg font-medium transition-colors ${
                 currentPage === page
                   ? 'bg-blue-600 text-white'
                   : 'hover:bg-gray-100 text-gray-700'
@@ -104,7 +104,7 @@ export function Pagination({
               {page}
             </button>
           ) : (
-            <span key={index} className="px-2 text-gray-400">
+            <span key={index} className='px-2 text-gray-400'>
               {page}
             </span>
           )
@@ -113,9 +113,9 @@ export function Pagination({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className='p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className='w-5 h-5' />
         </button>
       </div>
     </div>

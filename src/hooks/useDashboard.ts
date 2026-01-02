@@ -14,6 +14,7 @@ import {
   setCommentSearchQuery,
   clearCommentError,
 } from '../store/slices/commentSlice'
+import { fetchTodos, clearTodoError } from '../store/slices/todoSlice'
 import type { Post } from '../@types'
 import { useDebounce } from './useDebounce'
 
@@ -33,6 +34,7 @@ export function useDashboard() {
     error: commentError,
     searchQuery: commentSearchQuery,
   } = useAppSelector((state) => state.comment)
+  const { todos, loading: todoLoading, error: todoError } = useAppSelector((state) => state.todo)
 
   const debouncedUserSearch = useDebounce(searchQuery, 300)
   const debouncedPostSearch = useDebounce(postSearchQuery, 300)
@@ -48,7 +50,10 @@ export function useDashboard() {
     if (comments.length === 0) {
       dispatch(fetchComments())
     }
-  }, [dispatch, users.length, posts.length, comments.length])
+    if (todos.length === 0) {
+      dispatch(fetchTodos())
+    }
+  }, [dispatch, users.length, posts.length, comments.length, todos.length])
 
   const filteredUsers = useMemo(
     () =>
@@ -82,6 +87,59 @@ export function useDashboard() {
     [comments, debouncedCommentSearch]
   )
 
+  // Dashboard stats
+  const stats = useMemo(() => {
+    const completedTodos = todos.filter((t) => t.completed).length
+    return {
+      totalUsers: users.length,
+      totalPosts: posts.length,
+      totalComments: comments.length,
+      totalTodos: todos.length,
+      completedTodos,
+    }
+  }, [users.length, posts.length, comments.length, todos])
+
+  // Posts per user for chart
+  const postsPerUser = useMemo(() => {
+    const userPostCounts = users.map((user) => ({
+      name: user.name.split(' ')[0], // First name only for chart
+      posts: posts.filter((p) => p.userId === user.id).length,
+    }))
+    return userPostCounts.sort((a, b) => b.posts - a.posts)
+  }, [users, posts])
+
+  // Todo completion per user for chart
+  const todoCompletionPerUser = useMemo(() => {
+    const userTodoCounts = users.map((user) => {
+      const userTodos = todos.filter((t) => t.userId === user.id)
+      return {
+        name: user.name.split(' ')[0],
+        completed: userTodos.filter((t) => t.completed).length,
+        total: userTodos.length,
+      }
+    })
+    return userTodoCounts.sort((a, b) => b.completed - a.completed)
+  }, [users, todos])
+
+  // User activities for table
+  const userActivities = useMemo(() => {
+    return users.map((user) => {
+      const userTodos = todos.filter((t) => t.userId === user.id)
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        posts: posts.filter((p) => p.userId === user.id).length,
+        comments: comments.filter((c) => {
+          const post = posts.find((p) => p.id === c.postId)
+          return post?.userId === user.id
+        }).length,
+        todos: userTodos.length,
+        completedTodos: userTodos.filter((t) => t.completed).length,
+      }
+    })
+  }, [users, posts, comments, todos])
+
   const handleSearch = useCallback(
     (value: string) => {
       dispatch(setSearchQuery(value))
@@ -107,15 +165,18 @@ export function useDashboard() {
     dispatch(clearError())
     dispatch(clearPostError())
     dispatch(clearCommentError())
+    dispatch(clearTodoError())
   }, [dispatch])
 
   const handleRetry = useCallback(() => {
     dispatch(clearError())
     dispatch(clearPostError())
     dispatch(clearCommentError())
+    dispatch(clearTodoError())
     dispatch(fetchUsers())
     dispatch(fetchPosts())
     dispatch(fetchComments())
+    dispatch(fetchTodos())
   }, [dispatch])
 
   const handleCreatePost = useCallback(
@@ -146,12 +207,17 @@ export function useDashboard() {
     filteredPosts,
     comments,
     filteredComments,
+    todos,
+    stats,
+    postsPerUser,
+    todoCompletionPerUser,
+    userActivities,
     searchTerm: searchQuery,
     postSearchTerm: postSearchQuery,
     commentSearchTerm: commentSearchQuery,
-    isLoading: userLoading || postLoading || commentLoading,
+    isLoading: userLoading || postLoading || commentLoading || todoLoading,
     operationLoading,
-    error: userError || postError || commentError,
+    error: userError || postError || commentError || todoError,
     handleSearch,
     handlePostSearch,
     handleCommentSearch,
