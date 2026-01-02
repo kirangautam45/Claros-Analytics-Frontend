@@ -74,8 +74,8 @@ const renderWithProviders = (ui: React.ReactElement) => {
 describe('Users', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.mocked(postApi.postApi.getAll).mockResolvedValue({ data: [] })
-    vi.mocked(commentApi.commentApi.getAll).mockResolvedValue({ data: [] })
+    vi.mocked(postApi.postApi.getAll).mockResolvedValue({ data: [] } as any)
+    vi.mocked(commentApi.commentApi.getAll).mockResolvedValue({ data: [] } as any)
   })
 
   it('should render loading state initially', () => {
@@ -97,7 +97,7 @@ describe('Users', () => {
   })
 
   it('should render users table when data is loaded', async () => {
-    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers })
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers } as any)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(screen.getByText('Leanne Graham')).toBeInTheDocument()
@@ -108,7 +108,7 @@ describe('Users', () => {
   })
 
   it('should render search input', async () => {
-    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers })
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: mockUsers } as any)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(
@@ -118,7 +118,7 @@ describe('Users', () => {
   })
 
   it('should show no users found when list is empty', async () => {
-    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: [] })
+    vi.mocked(userApi.userApi.getAll).mockResolvedValue({ data: [] } as any)
     renderWithProviders(<Users />)
     await waitFor(() => {
       expect(screen.getByText('No users found')).toBeInTheDocument()

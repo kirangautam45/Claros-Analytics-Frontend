@@ -11,11 +11,11 @@ export function LoadingSpinner({ size = 'md', text }: LoadingSpinnerProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center py-12">
+    <div className='flex flex-col items-center justify-center py-12'>
       <div
         className={`animate-spin rounded-full border-b-2 border-blue-500 ${sizeClasses[size]}`}
       />
-      {text && <p className="mt-4 text-gray-500">{text}</p>}
+      {text && <p className='mt-4 text-gray-500'>{text}</p>}
     </div>
   )
 }

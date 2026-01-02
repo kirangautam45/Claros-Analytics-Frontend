@@ -1,4 +1,5 @@
-import { ReactNode, useEffect } from 'react'
+import type { ReactNode } from 'react'
+import { useEffect } from 'react'
 import { X } from 'lucide-react'
 
 interface ModalProps {
@@ -9,7 +10,13 @@ interface ModalProps {
   children: ReactNode
 }
 
-export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalProps) {
+export function Modal({
+  isOpen,
+  onClose,
+  title,
+  size = 'md',
+  children,
+}: ModalProps) {
   const sizeClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
@@ -35,11 +42,11 @@ export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalPr
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex min-h-full items-center justify-center p-4">
+    <div className='fixed inset-0 z-50 overflow-y-auto'>
+      <div className='flex min-h-full items-center justify-center p-4'>
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-black/50 transition-opacity"
+          className='fixed inset-0 bg-black/50 transition-opacity'
           onClick={onClose}
         />
 
@@ -48,18 +55,18 @@ export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalPr
           className={`relative bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4`}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
+          <div className='flex items-center justify-between p-6 border-b'>
+            <h2 className='text-xl font-semibold text-gray-900'>{title}</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className='p-2 hover:bg-gray-100 rounded-lg transition-colors'
             >
-              <X size={20} className="text-gray-500" />
+              <X size={20} className='text-gray-500' />
             </button>
           </div>
 
           {/* Content */}
-          <div className="p-6">{children}</div>
+          <div className='p-6'>{children}</div>
         </div>
       </div>
     </div>
