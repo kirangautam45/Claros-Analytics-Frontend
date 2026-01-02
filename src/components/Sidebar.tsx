@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, Users, FileText, MessageSquare, CheckSquare, Images } from 'lucide-react'
+import { LayoutDashboard, Users, FileText, MessageSquare, CheckSquare } from 'lucide-react'
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -7,7 +7,6 @@ const navItems = [
   { to: '/posts', label: 'Posts', icon: FileText },
   { to: '/comments', label: 'Comments', icon: MessageSquare },
   { to: '/todos', label: 'Todos', icon: CheckSquare },
-  { to: '/albums', label: 'Albums', icon: Images },
 ]
 
 export default function Sidebar() {

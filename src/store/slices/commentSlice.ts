@@ -16,10 +16,13 @@ const initialState: CommentState = {
   searchQuery: '',
 }
 
-export const fetchComments = createAsyncThunk('comment/fetchComments', async () => {
-  const response = await commentApi.getAll()
-  return response.data
-})
+export const fetchComments = createAsyncThunk(
+  'comment/fetchComments',
+  async () => {
+    const response = await commentApi.getAll()
+    return response.data
+  }
+)
 
 const commentSlice = createSlice({
   name: 'comment',

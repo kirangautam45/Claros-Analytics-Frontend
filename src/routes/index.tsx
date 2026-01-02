@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Users from '../pages/Users'
 import Posts from '../pages/Posts'
 import Comments from '../pages/Comments'
+import Todos from '../pages/Todos'
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: 'comments',
         element: <Comments />,
+      },
+      {
+        path: 'todos',
+        element: <Todos />,
       },
     ],
   },
