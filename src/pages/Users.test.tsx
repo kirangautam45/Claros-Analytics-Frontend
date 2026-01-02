@@ -5,10 +5,26 @@ import { configureStore } from '@reduxjs/toolkit'
 import { MemoryRouter } from 'react-router-dom'
 import Users from './Users'
 import userReducer from '../store/slices/userSlice'
+import postReducer from '../store/slices/postSlice'
+import commentReducer from '../store/slices/commentSlice'
 import * as userApi from '../api/userApi'
+import * as postApi from '../api/postApi'
+import * as commentApi from '../api/commentApi'
 
 vi.mock('../api/userApi', () => ({
   userApi: {
+    getAll: vi.fn(),
+  },
+}))
+
+vi.mock('../api/postApi', () => ({
+  postApi: {
+    getAll: vi.fn(),
+  },
+}))
+
+vi.mock('../api/commentApi', () => ({
+  commentApi: {
     getAll: vi.fn(),
   },
 }))
@@ -38,7 +54,11 @@ const mockUsers = [
 
 const createMockStore = () => {
   return configureStore({
-    reducer: { user: userReducer },
+    reducer: {
+      user: userReducer,
+      post: postReducer,
+      comment: commentReducer,
+    },
   })
 }
 
@@ -54,6 +74,8 @@ const renderWithProviders = (ui: React.ReactElement) => {
 describe('Users', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    vi.mocked(postApi.postApi.getAll).mockResolvedValue({ data: [] })
+    vi.mocked(commentApi.commentApi.getAll).mockResolvedValue({ data: [] })
   })
 
   it('should render loading state initially', () => {
@@ -61,7 +83,7 @@ describe('Users', () => {
       () => new Promise(() => {})
     )
     renderWithProviders(<Users />)
-    expect(document.querySelector('.animate-spin')).toBeInTheDocument()
+    expect(screen.getByText('Loading users...')).toBeInTheDocument()
   })
 
   it('should render error state when API fails', async () => {
@@ -70,7 +92,7 @@ describe('Users', () => {
     )
     renderWithProviders(<Users />)
     await waitFor(() => {
-      expect(screen.getByText('Error loading users')).toBeInTheDocument()
+      expect(screen.getByText('Error')).toBeInTheDocument()
     })
   })
 
