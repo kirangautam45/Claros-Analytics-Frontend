@@ -4,37 +4,16 @@ interface StatCardProps {
   title: string
   value: number
   icon: ReactNode
-  color: 'blue' | 'green' | 'purple' | 'orange' | 'cyan' | 'pink'
+  color: 'teal' | 'cyan' | 'emerald' | 'amber' | 'slate'
 }
 
 const colorConfig = {
-  blue: {
+  teal: {
     bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-blue-500 to-blue-600',
-    iconShadow: 'shadow-blue-500/30',
-    accent: 'text-blue-600',
-    bar: 'bg-linear-to-r from-blue-400 to-blue-600',
-  },
-  green: {
-    bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-emerald-500 to-emerald-600',
-    iconShadow: 'shadow-emerald-500/30',
-    accent: 'text-emerald-600',
-    bar: 'bg-linear-to-r from-emerald-400 to-emerald-600',
-  },
-  purple: {
-    bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-purple-500 to-purple-600',
-    iconShadow: 'shadow-purple-500/30',
-    accent: 'text-purple-600',
-    bar: 'bg-linear-to-r from-purple-400 to-purple-600',
-  },
-  orange: {
-    bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-orange-500 to-orange-600',
-    iconShadow: 'shadow-orange-500/30',
-    accent: 'text-orange-600',
-    bar: 'bg-linear-to-r from-orange-400 to-orange-600',
+    iconBg: 'bg-linear-to-br from-teal-500 to-teal-600',
+    iconShadow: 'shadow-teal-500/30',
+    accent: 'text-teal-600',
+    bar: 'bg-linear-to-r from-teal-400 to-teal-600',
   },
   cyan: {
     bg: 'bg-white',
@@ -43,12 +22,26 @@ const colorConfig = {
     accent: 'text-cyan-600',
     bar: 'bg-linear-to-r from-cyan-400 to-cyan-600',
   },
-  pink: {
+  emerald: {
     bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-pink-500 to-pink-600',
-    iconShadow: 'shadow-pink-500/30',
-    accent: 'text-pink-600',
-    bar: 'bg-linear-to-r from-pink-400 to-pink-600',
+    iconBg: 'bg-linear-to-br from-emerald-500 to-emerald-600',
+    iconShadow: 'shadow-emerald-500/30',
+    accent: 'text-emerald-600',
+    bar: 'bg-linear-to-r from-emerald-400 to-emerald-600',
+  },
+  amber: {
+    bg: 'bg-white',
+    iconBg: 'bg-linear-to-br from-amber-500 to-amber-600',
+    iconShadow: 'shadow-amber-500/30',
+    accent: 'text-amber-600',
+    bar: 'bg-linear-to-r from-amber-400 to-amber-600',
+  },
+  slate: {
+    bg: 'bg-white',
+    iconBg: 'bg-linear-to-br from-slate-500 to-slate-600',
+    iconShadow: 'shadow-slate-500/30',
+    accent: 'text-slate-600',
+    bar: 'bg-linear-to-r from-slate-400 to-slate-600',
   },
 }
 

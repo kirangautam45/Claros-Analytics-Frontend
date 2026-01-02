@@ -61,24 +61,19 @@ describe('SimpleBarChart', () => {
     expect(screen.getByText('No data available')).toBeInTheDocument()
   })
 
-  it('should apply blue color classes by default', () => {
+  it('should apply teal color classes by default', () => {
     const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" />)
-    expect(container.innerHTML).toContain('from-blue-400')
+    expect(container.innerHTML).toContain('from-teal-400')
   })
 
-  it('should apply green color classes when specified', () => {
-    const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" color="green" />)
+  it('should apply cyan color classes when specified', () => {
+    const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" color="cyan" />)
+    expect(container.innerHTML).toContain('from-cyan-400')
+  })
+
+  it('should apply emerald color classes when specified', () => {
+    const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" color="emerald" />)
     expect(container.innerHTML).toContain('from-emerald-400')
-  })
-
-  it('should apply purple color classes when specified', () => {
-    const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" color="purple" />)
-    expect(container.innerHTML).toContain('from-purple-400')
-  })
-
-  it('should apply orange color classes when specified', () => {
-    const { container } = render(<SimpleBarChart data={mockData} title="Test Chart" color="orange" />)
-    expect(container.innerHTML).toContain('from-orange-400')
   })
 
   it('should format large numbers with locale string', () => {

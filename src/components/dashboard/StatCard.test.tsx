@@ -8,7 +8,7 @@ describe('StatCard', () => {
     title: 'Total Users',
     value: 1234,
     icon: <Users data-testid="icon" />,
-    color: 'blue' as const,
+    color: 'teal' as const,
   }
 
   it('should render the title', () => {
@@ -36,32 +36,11 @@ describe('StatCard', () => {
     expect(screen.getByText('0')).toBeInTheDocument()
   })
 
-  it('should apply blue color classes', () => {
-    const { container } = render(<StatCard {...defaultProps} color="blue" />)
+  it('should apply teal color classes', () => {
+    const { container } = render(<StatCard {...defaultProps} color="teal" />)
     const card = container.firstChild as HTMLElement
-    expect(card.className).toContain('from-blue-50')
-    expect(card.className).toContain('border-blue-200')
-  })
-
-  it('should apply green color classes', () => {
-    const { container } = render(<StatCard {...defaultProps} color="green" />)
-    const card = container.firstChild as HTMLElement
-    expect(card.className).toContain('from-emerald-50')
-    expect(card.className).toContain('border-emerald-200')
-  })
-
-  it('should apply purple color classes', () => {
-    const { container } = render(<StatCard {...defaultProps} color="purple" />)
-    const card = container.firstChild as HTMLElement
-    expect(card.className).toContain('from-purple-50')
-    expect(card.className).toContain('border-purple-200')
-  })
-
-  it('should apply orange color classes', () => {
-    const { container } = render(<StatCard {...defaultProps} color="orange" />)
-    const card = container.firstChild as HTMLElement
-    expect(card.className).toContain('from-orange-50')
-    expect(card.className).toContain('border-orange-200')
+    expect(card.className).toContain('from-teal-50')
+    expect(card.className).toContain('border-teal-200')
   })
 
   it('should apply cyan color classes', () => {
@@ -71,11 +50,25 @@ describe('StatCard', () => {
     expect(card.className).toContain('border-cyan-200')
   })
 
-  it('should apply pink color classes', () => {
-    const { container } = render(<StatCard {...defaultProps} color="pink" />)
+  it('should apply emerald color classes', () => {
+    const { container } = render(<StatCard {...defaultProps} color="emerald" />)
     const card = container.firstChild as HTMLElement
-    expect(card.className).toContain('from-pink-50')
-    expect(card.className).toContain('border-pink-200')
+    expect(card.className).toContain('from-emerald-50')
+    expect(card.className).toContain('border-emerald-200')
+  })
+
+  it('should apply amber color classes', () => {
+    const { container } = render(<StatCard {...defaultProps} color="amber" />)
+    const card = container.firstChild as HTMLElement
+    expect(card.className).toContain('from-amber-50')
+    expect(card.className).toContain('border-amber-200')
+  })
+
+  it('should apply slate color classes', () => {
+    const { container } = render(<StatCard {...defaultProps} color="slate" />)
+    const card = container.firstChild as HTMLElement
+    expect(card.className).toContain('from-slate-50')
+    expect(card.className).toContain('border-slate-200')
   })
 
   it('should have hover transition classes', () => {

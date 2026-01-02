@@ -8,39 +8,32 @@ interface BarChartData {
 interface SimpleBarChartProps {
   data: BarChartData[]
   title: string
-  color?: 'blue' | 'green' | 'purple' | 'orange'
+  color?: 'teal' | 'cyan' | 'emerald'
   showRank?: boolean
   limit?: number
 }
 
 const colorConfig = {
-  blue: {
-    bar: 'bg-linear-to-r from-blue-400 via-blue-500 to-blue-600',
-    bg: 'bg-blue-100/50',
-    text: 'text-blue-600',
-    badge: 'bg-blue-500',
-    glow: 'shadow-blue-500/20',
+  teal: {
+    bar: 'bg-linear-to-r from-teal-400 via-teal-500 to-teal-600',
+    bg: 'bg-teal-100/50',
+    text: 'text-teal-600',
+    badge: 'bg-teal-500',
+    glow: 'shadow-teal-500/20',
   },
-  green: {
+  cyan: {
+    bar: 'bg-linear-to-r from-cyan-400 via-cyan-500 to-cyan-600',
+    bg: 'bg-cyan-100/50',
+    text: 'text-cyan-600',
+    badge: 'bg-cyan-500',
+    glow: 'shadow-cyan-500/20',
+  },
+  emerald: {
     bar: 'bg-linear-to-r from-emerald-400 via-emerald-500 to-emerald-600',
     bg: 'bg-emerald-100/50',
     text: 'text-emerald-600',
     badge: 'bg-emerald-500',
     glow: 'shadow-emerald-500/20',
-  },
-  purple: {
-    bar: 'bg-linear-to-r from-purple-400 via-purple-500 to-purple-600',
-    bg: 'bg-purple-100/50',
-    text: 'text-purple-600',
-    badge: 'bg-purple-500',
-    glow: 'shadow-purple-500/20',
-  },
-  orange: {
-    bar: 'bg-linear-to-r from-orange-400 via-orange-500 to-orange-600',
-    bg: 'bg-orange-100/50',
-    text: 'text-orange-600',
-    badge: 'bg-orange-500',
-    glow: 'shadow-orange-500/20',
   },
 }
 
@@ -54,7 +47,7 @@ const getRankIcon = (index: number) => {
 export function SimpleBarChart({
   data,
   title,
-  color = 'blue',
+  color = 'teal',
   showRank = true,
   limit = 5,
 }: SimpleBarChartProps) {
