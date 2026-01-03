@@ -1,5 +1,12 @@
 import { useState, useMemo } from 'react'
-import { ChevronUp, ChevronDown, Trophy, Medal } from 'lucide-react'
+import {
+  ChevronUp,
+  ChevronDown,
+  Trophy,
+  Medal,
+  Users,
+  ArrowUpDown,
+} from 'lucide-react'
 
 interface UserActivity {
   id: number
@@ -55,43 +62,55 @@ export function ActivityTable({ activities }: ActivityTableProps) {
 
   const renderSortIcon = (columnKey: SortKey) => {
     if (sortKey !== columnKey) {
-      return (
-        <span className='text-gray-300 ml-1'>
-          <ChevronUp className='w-3 h-3' />
-        </span>
-      )
+      return <ArrowUpDown className='w-3 h-3 text-gray-300 ml-1' />
     }
     return sortDirection === 'asc' ? (
-      <ChevronUp className='w-3 h-3 text-blue-500 ml-1' />
+      <ChevronUp className='w-3.5 h-3.5 text-teal-500 ml-1' />
     ) : (
-      <ChevronDown className='w-3 h-3 text-blue-500 ml-1' />
+      <ChevronDown className='w-3.5 h-3.5 text-teal-500 ml-1' />
     )
   }
 
   const getRankBadge = (index: number) => {
     if (index === 0)
       return (
-        <Trophy className='w-4 h-4 text-yellow-500' />
+        <div className='w-6 h-6 rounded-full bg-linear-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-sm'>
+          <Trophy className='w-3.5 h-3.5 text-white' />
+        </div>
       )
     if (index === 1)
       return (
-        <Medal className='w-4 h-4 text-gray-400' />
+        <div className='w-6 h-6 rounded-full bg-linear-to-br from-gray-300 to-gray-400 flex items-center justify-center shadow-sm'>
+          <Medal className='w-3.5 h-3.5 text-white' />
+        </div>
       )
     if (index === 2)
       return (
-        <Medal className='w-4 h-4 text-amber-600' />
+        <div className='w-6 h-6 rounded-full bg-linear-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-sm'>
+          <Medal className='w-3.5 h-3.5 text-white' />
+        </div>
       )
     return null
   }
 
   return (
-    <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200'>
-      <div className='px-4 sm:px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-slate-50 to-gray-50'>
+    <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300'>
+      <div className='px-5 sm:px-6 py-5 border-b border-gray-100 bg-linear-to-r from-teal-50 via-cyan-50 to-emerald-50'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-base sm:text-lg font-semibold text-gray-900'>
-            User Activity Overview
-          </h3>
-          <span className='text-xs text-gray-400'>
+          <div className='flex items-center gap-3'>
+            <div className='p-2.5 bg-linear-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg shadow-teal-500/20'>
+              <Users className='w-5 h-5 text-white' />
+            </div>
+            <div>
+              <h3 className='text-lg font-bold text-gray-900'>
+                User Activity Overview
+              </h3>
+              <p className='text-xs text-gray-500 mt-0.5'>
+                Track user engagement and progress
+              </p>
+            </div>
+          </div>
+          <span className='text-xs font-semibold text-teal-600 bg-teal-100 px-3 py-1.5 rounded-full'>
             {activities.length} users
           </span>
         </div>
@@ -162,21 +181,21 @@ export function ActivityTable({ activities }: ActivityTableProps) {
 
               const getProgressColor = () => {
                 if (completionRate >= 70)
-                  return 'bg-gradient-to-r from-emerald-400 to-emerald-500'
+                  return 'bg-linear-to-r from-emerald-400 to-emerald-500'
                 if (completionRate >= 40)
-                  return 'bg-gradient-to-r from-amber-400 to-amber-500'
-                return 'bg-gradient-to-r from-red-400 to-red-500'
+                  return 'bg-linear-to-r from-amber-400 to-amber-500'
+                return 'bg-linear-to-r from-red-400 to-red-500'
               }
 
               return (
                 <tr
                   key={activity.id}
-                  className='hover:bg-blue-50/50 transition-colors group'
+                  className='hover:bg-teal-50/50 transition-all duration-200 group'
                 >
                   <td className='px-4 sm:px-6 py-4'>
-                    <div className='flex items-center justify-center w-6 h-6'>
+                    <div className='flex items-center justify-center'>
                       {getRankBadge(index) || (
-                        <span className='text-xs text-gray-400 font-medium'>
+                        <span className='w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs text-gray-500 font-semibold'>
                           {index + 1}
                         </span>
                       )}
@@ -185,51 +204,55 @@ export function ActivityTable({ activities }: ActivityTableProps) {
                   <td className='px-4 sm:px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div
-                        className='w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600
-                          flex items-center justify-center text-white text-sm font-semibold shrink-0'
+                        className='w-9 h-9 rounded-xl bg-linear-to-br from-teal-400 to-cyan-600
+                          flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm'
                       >
                         {activity.name.charAt(0)}
                       </div>
-                      <span className='text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors'>
+                      <span className='text-sm font-semibold text-gray-900 group-hover:text-teal-600 transition-colors'>
                         {activity.name}
                       </span>
                     </div>
                   </td>
                   <td className='px-4 sm:px-6 py-4 hidden sm:table-cell'>
-                    <span className='text-sm text-gray-500'>{activity.email}</span>
+                    <span className='text-sm text-gray-500'>
+                      {activity.email}
+                    </span>
                   </td>
                   <td className='px-4 sm:px-6 py-4 text-center'>
-                    <span className='inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700'>
+                    <span className='inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-teal-100 text-teal-700'>
                       {activity.posts}
                     </span>
                   </td>
                   <td className='px-4 sm:px-6 py-4 text-center hidden md:table-cell'>
-                    <span className='inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700'>
+                    <span className='inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-100 text-cyan-700'>
                       {activity.comments}
                     </span>
                   </td>
                   <td className='px-4 sm:px-6 py-4 text-center'>
-                    <span className='text-sm font-medium text-gray-700'>
-                      <span className='text-emerald-600'>{activity.completedTodos}</span>
-                      <span className='text-gray-400'>/</span>
+                    <span className='text-sm font-semibold text-gray-700'>
+                      <span className='text-emerald-600'>
+                        {activity.completedTodos}
+                      </span>
+                      <span className='text-gray-300 mx-0.5'>/</span>
                       <span>{activity.todos}</span>
                     </span>
                   </td>
                   <td className='px-4 sm:px-6 py-4 hidden sm:table-cell'>
-                    <div className='flex items-center gap-2'>
-                      <div className='flex-1 h-2.5 bg-gray-100 rounded-full overflow-hidden'>
+                    <div className='flex items-center gap-3'>
+                      <div className='flex-1 h-2 bg-gray-100 rounded-full overflow-hidden'>
                         <div
-                          className={`h-full rounded-full transition-all duration-500 ${getProgressColor()}`}
+                          className={`h-full rounded-full transition-all duration-700 ${getProgressColor()}`}
                           style={{ width: `${completionRate}%` }}
                         />
                       </div>
                       <span
-                        className={`text-xs font-semibold w-10 text-right ${
+                        className={`text-xs font-bold w-10 text-right ${
                           completionRate >= 70
                             ? 'text-emerald-600'
                             : completionRate >= 40
-                              ? 'text-amber-600'
-                              : 'text-red-500'
+                            ? 'text-amber-600'
+                            : 'text-red-500'
                         }`}
                       >
                         {completionRate}%

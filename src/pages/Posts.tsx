@@ -161,7 +161,7 @@ export function PostsPage() {
   return (
     <div className='flex flex-col'>
       <Header title='Posts' />
-      <div className='flex-1 p-6'>
+      <div className='flex-1 p-4 sm:p-6'>
         <div className='max-w-7xl mx-auto space-y-6'>
           {/* Search and Add Button */}
           <div className='flex flex-wrap gap-4 justify-between items-center'>
@@ -228,6 +228,7 @@ export function PostsPage() {
         size='lg'
       >
         <PostForm
+          key={selectedPost?.id ?? 'new'}
           post={selectedPost}
           users={users}
           onSubmit={handleFormSubmit}
