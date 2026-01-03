@@ -37,13 +37,18 @@ const mockPosts: Post[] = [
   { id: 2, userId: 2, title: 'Post 2', body: 'Body 2' },
 ]
 
+interface LocalPost extends Post {
+  isLocal?: boolean
+}
+
 interface PostState {
-  posts: Post[]
-  selectedPost: Post | null
+  posts: LocalPost[]
+  selectedPost: LocalPost | null
   loading: boolean
   operationLoading: boolean
   error: string | null
   searchQuery: string
+  nextLocalId: number
 }
 
 const createTestStore = (preloadedPostState?: Partial<PostState>) =>
@@ -58,6 +63,7 @@ const createTestStore = (preloadedPostState?: Partial<PostState>) =>
             operationLoading: false,
             error: null,
             searchQuery: '',
+            nextLocalId: 1000,
             ...preloadedPostState,
           },
         }
@@ -159,7 +165,11 @@ describe('postSlice', () => {
 
       const state = store.getState().post
       expect(state.operationLoading).toBe(false)
-      expect(state.posts[0]).toEqual(createdPost)
+      // Post should be marked as local with a local ID
+      expect(state.posts[0].isLocal).toBe(true)
+      expect(state.posts[0].id).toBe(1000) // First local ID
+      expect(state.posts[0].title).toBe(newPost.title)
+      expect(state.nextLocalId).toBe(1001)
     })
 
     it('should handle rejected state', async () => {
@@ -213,6 +223,22 @@ describe('postSlice', () => {
       expect(state.operationLoading).toBe(false)
       expect(state.error).toBe('Update failed')
     })
+
+    it('should handle local post update without API call', async () => {
+      store = createTestStore({
+        posts: [{ id: 1000, userId: 1, title: 'Local Post', body: 'Body', isLocal: true }],
+      })
+
+      await store.dispatch(
+        updatePost({ id: 1000, post: { title: 'Updated Local Post' }, isLocal: true })
+      )
+
+      const state = store.getState().post
+      expect(state.operationLoading).toBe(false)
+      expect(state.posts[0].title).toBe('Updated Local Post')
+      expect(state.posts[0].isLocal).toBe(true)
+      expect(postApi.update).not.toHaveBeenCalled()
+    })
   })
 
   describe('deletePost async thunk', () => {
@@ -231,7 +257,7 @@ describe('postSlice', () => {
     it('should handle fulfilled state', async () => {
       vi.mocked(postApi.delete).mockResolvedValue(mockAxiosResponse(null))
 
-      await store.dispatch(deletePost(1))
+      await store.dispatch(deletePost({ id: 1 }))
 
       const state = store.getState().post
       expect(state.operationLoading).toBe(false)
@@ -242,11 +268,24 @@ describe('postSlice', () => {
     it('should handle rejected state', async () => {
       vi.mocked(postApi.delete).mockRejectedValue(new Error('Delete failed'))
 
-      await store.dispatch(deletePost(1))
+      await store.dispatch(deletePost({ id: 1 }))
 
       const state = store.getState().post
       expect(state.operationLoading).toBe(false)
       expect(state.error).toBe('Delete failed')
+    })
+
+    it('should handle local post deletion without API call', async () => {
+      store = createTestStore({
+        posts: [{ id: 1000, userId: 1, title: 'Local Post', body: 'Body', isLocal: true }],
+      })
+
+      await store.dispatch(deletePost({ id: 1000, isLocal: true }))
+
+      const state = store.getState().post
+      expect(state.operationLoading).toBe(false)
+      expect(state.posts).toHaveLength(0)
+      expect(postApi.delete).not.toHaveBeenCalled()
     })
   })
 

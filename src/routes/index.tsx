@@ -2,13 +2,13 @@ import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { LazyPage } from '../components/common/LazyPage'
+import Users from '../pages/Users'
+import NotFound from '../pages/NotFound'
 
 const Dashboard = lazy(() => import('../pages/Dashboard'))
-const Users = lazy(() => import('../pages/Users'))
 const Posts = lazy(() => import('../pages/Posts'))
 const Comments = lazy(() => import('../pages/Comments'))
 const Todos = lazy(() => import('../pages/Todos'))
-const NotFound = lazy(() => import('../pages/NotFound'))
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'users',
-        element: <LazyPage Component={Users} />,
+        element: <Users />,
       },
       {
         path: 'posts',

@@ -12,6 +12,8 @@ import { useDashboard } from '@/hooks'
 import type { Post } from '@/@types'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
 
+type LocalPost = Post & { isLocal?: boolean }
+
 export function PostsPage() {
   const {
     filteredPosts,
@@ -34,7 +36,7 @@ export function PostsPage() {
   // Modal states
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+  const [selectedPost, setSelectedPost] = useState<LocalPost | null>(null)
 
   const paginatedPosts = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage
@@ -53,12 +55,12 @@ export function PostsPage() {
     setIsFormOpen(true)
   }
 
-  const openEditModal = (post: Post) => {
+  const openEditModal = (post: LocalPost) => {
     setSelectedPost(post)
     setIsFormOpen(true)
   }
 
-  const openDeleteModal = (post: Post) => {
+  const openDeleteModal = (post: LocalPost) => {
     setSelectedPost(post)
     setIsDeleteOpen(true)
   }
@@ -70,7 +72,11 @@ export function PostsPage() {
   }) => {
     try {
       if (selectedPost) {
-        await handleUpdatePost({ ...data, id: selectedPost.id })
+        await handleUpdatePost({
+          ...data,
+          id: selectedPost.id,
+          isLocal: selectedPost.isLocal,
+        })
       } else {
         await handleCreatePost(data)
       }
@@ -84,7 +90,7 @@ export function PostsPage() {
   const handleConfirmDelete = async () => {
     if (selectedPost) {
       try {
-        await handleDeletePost(selectedPost.id)
+        await handleDeletePost(selectedPost.id, selectedPost.isLocal)
         setIsDeleteOpen(false)
         setSelectedPost(null)
       } catch {
@@ -99,7 +105,7 @@ export function PostsPage() {
       header: '#',
       className: 'w-16',
       hideOnMobile: true,
-      render: (post: Post) => (
+      render: (post: LocalPost) => (
         <span className='text-gray-400 font-mono text-xs'>{post.id}</span>
       ),
     },
@@ -108,7 +114,7 @@ export function PostsPage() {
       header: 'Author',
       className: 'w-44',
       hideOnMobile: true,
-      render: (post: Post) => (
+      render: (post: LocalPost) => (
         <span className='badge badge-info'>{getUserName(post.userId)}</span>
       ),
     },
@@ -116,7 +122,7 @@ export function PostsPage() {
       key: 'title',
       header: 'Title',
       className: 'w-1/3',
-      render: (post: Post) => (
+      render: (post: LocalPost) => (
         <span className='font-semibold text-gray-900 first-letter:uppercase wrap-break-word'>
           {post.title}
         </span>
@@ -127,7 +133,7 @@ export function PostsPage() {
       header: 'Content',
       className: 'w-1/3',
       hideOnMobile: true,
-      render: (post: Post) => (
+      render: (post: LocalPost) => (
         <p className='text-gray-500 text-sm leading-relaxed first-letter:uppercase wrap-break-word'>
           {post.body}
         </p>
@@ -137,7 +143,7 @@ export function PostsPage() {
       key: 'actions',
       header: 'Actions',
       className: 'w-28',
-      render: (post: Post) => (
+      render: (post: LocalPost) => (
         <div className='flex gap-1'>
           <button
             onClick={() => openEditModal(post)}

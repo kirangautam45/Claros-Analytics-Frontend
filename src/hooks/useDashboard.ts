@@ -187,15 +187,15 @@ export function useDashboard() {
   )
 
   const handleUpdatePost = useCallback(
-    async (data: Post) => {
-      return dispatch(updatePost({ id: data.id, post: data })).unwrap()
+    async (data: Post & { isLocal?: boolean }) => {
+      return dispatch(updatePost({ id: data.id, post: data, isLocal: data.isLocal })).unwrap()
     },
     [dispatch]
   )
 
   const handleDeletePost = useCallback(
-    async (id: number) => {
-      return dispatch(deletePost(id)).unwrap()
+    async (id: number, isLocal?: boolean) => {
+      return dispatch(deletePost({ id, isLocal })).unwrap()
     },
     [dispatch]
   )
