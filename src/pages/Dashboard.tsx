@@ -78,8 +78,8 @@ export function DashboardPage() {
       <Header title='Dashboard' />
       <div className='flex-1 p-3 sm:p-6 overflow-auto'>
         <div className='max-w-7xl mx-auto space-y-4 sm:space-y-6'>
-          {/* Dashboard Header with Welcome & Refresh */}
-          <DashboardHeader onRefresh={handleRetry} isLoading={isLoading} />
+          {/* Dashboard Header with Welcome */}
+          <DashboardHeader />
 
           {/* Stats Grid */}
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4'>
@@ -87,31 +87,31 @@ export function DashboardPage() {
               title='Total Users'
               value={stats?.totalUsers || 0}
               icon={<Users className='w-5 h-5' />}
-              color='blue'
+              color='teal'
             />
             <StatCard
               title='Total Posts'
               value={stats?.totalPosts || 0}
               icon={<FileText className='w-5 h-5' />}
-              color='green'
+              color='cyan'
             />
             <StatCard
               title='Comments'
               value={stats?.totalComments || 0}
               icon={<MessageSquare className='w-5 h-5' />}
-              color='purple'
+              color='emerald'
             />
             <StatCard
               title='Total Todos'
               value={stats?.totalTodos || 0}
               icon={<ClipboardList className='w-5 h-5' />}
-              color='orange'
+              color='amber'
             />
             <StatCard
               title='Completed'
               value={stats?.completedTodos || 0}
               icon={<CheckCircle className='w-5 h-5' />}
-              color='cyan'
+              color='slate'
             />
           </div>
 
@@ -121,7 +121,7 @@ export function DashboardPage() {
             <SimpleBarChart
               data={postsPerUser.map((u) => ({ name: u.name, value: u.posts }))}
               title='Top Users by Posts'
-              color='blue'
+              color='teal'
             />
 
             {/* Todo Completion Rate */}
@@ -169,7 +169,7 @@ export function DashboardPage() {
                 value: u.completed,
               }))}
               title='Top Users by Completions'
-              color='green'
+              color='cyan'
             />
           </div>
 

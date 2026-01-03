@@ -5,6 +5,7 @@ import Users from '../pages/Users'
 import Posts from '../pages/Posts'
 import Comments from '../pages/Comments'
 import Todos from '../pages/Todos'
+import NotFound from '../pages/NotFound'
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: 'todos',
         element: <Todos />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

@@ -18,9 +18,9 @@ export function Modal({
   children,
 }: ModalProps) {
   const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
+    sm: 'max-w-[calc(100vw-2rem)] sm:max-w-sm',
+    md: 'max-w-[calc(100vw-2rem)] sm:max-w-md',
+    lg: 'max-w-[calc(100vw-2rem)] sm:max-w-lg',
   }
 
   useEffect(() => {
@@ -52,11 +52,11 @@ export function Modal({
 
         {/* Modal */}
         <div
-          className={`relative bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4`}
+          className={`relative bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-2 sm:mx-4`}
         >
           {/* Header */}
-          <div className='flex items-center justify-between p-6 border-b'>
-            <h2 className='text-xl font-semibold text-gray-900'>{title}</h2>
+          <div className='flex items-center justify-between p-4 sm:p-6 border-b'>
+            <h2 className='text-lg sm:text-xl font-semibold text-gray-900'>{title}</h2>
             <button
               onClick={onClose}
               className='p-2 hover:bg-gray-100 rounded-lg transition-colors'
@@ -66,7 +66,7 @@ export function Modal({
           </div>
 
           {/* Content */}
-          <div className='p-6'>{children}</div>
+          <div className='p-4 sm:p-6'>{children}</div>
         </div>
       </div>
     </div>
