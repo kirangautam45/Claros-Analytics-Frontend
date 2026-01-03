@@ -1,11 +1,14 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/Layout'
-import Dashboard from '../pages/Dashboard'
-import Users from '../pages/Users'
-import Posts from '../pages/Posts'
-import Comments from '../pages/Comments'
-import Todos from '../pages/Todos'
-import NotFound from '../pages/NotFound'
+import { LazyPage } from '../components/common/LazyPage'
+
+const Dashboard = lazy(() => import('../pages/Dashboard'))
+const Users = lazy(() => import('../pages/Users'))
+const Posts = lazy(() => import('../pages/Posts'))
+const Comments = lazy(() => import('../pages/Comments'))
+const Todos = lazy(() => import('../pages/Todos'))
+const NotFound = lazy(() => import('../pages/NotFound'))
 
 export const router = createBrowserRouter([
   {
@@ -14,23 +17,23 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <LazyPage Component={Dashboard} />,
       },
       {
         path: 'users',
-        element: <Users />,
+        element: <LazyPage Component={Users} />,
       },
       {
         path: 'posts',
-        element: <Posts />,
+        element: <LazyPage Component={Posts} />,
       },
       {
         path: 'comments',
-        element: <Comments />,
+        element: <LazyPage Component={Comments} />,
       },
       {
         path: 'todos',
-        element: <Todos />,
+        element: <LazyPage Component={Todos} />,
       },
       {
         path: '*',

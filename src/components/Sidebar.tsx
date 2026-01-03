@@ -28,16 +28,16 @@ function ClarosLogo() {
           <path
             d='M5 35 L20 5 L35 35 Z'
             fill='none'
-            stroke='#0d9488'
+            stroke='#0891b2'
             strokeWidth='2'
             className='opacity-30'
           />
           <path
             d='M12 28 L20 12 L28 28 Z'
-            fill='#0d9488'
+            fill='#0891b2'
             className='opacity-60'
           />
-          <path d='M16 28 L20 18 L24 28 Z' fill='#14b8a6' />
+          <path d='M16 28 L20 18 L24 28 Z' fill='#22d3ee' />
           <path
             d='M8 32 L20 8'
             stroke='#0891b2'
@@ -50,7 +50,7 @@ function ClarosLogo() {
         <span className='text-lg font-bold tracking-tight text-slate-800'>
           CLAROS
         </span>
-        <span className='text-[10px] font-medium tracking-[0.2em] text-teal-600 -mt-0.5'>
+        <span className='text-[10px] font-medium tracking-[0.2em] text-cyan-600 -mt-0.5'>
           ANALYTICS
         </span>
       </div>
@@ -87,8 +87,8 @@ export default function Sidebar({ onClose }: SidebarProps) {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
                     isActive
-                      ? 'bg-linear-to-r from-teal-500 to-cyan-500 text-white shadow-md shadow-teal-500/20'
-                      : 'text-gray-600 hover:bg-teal-50 hover:text-teal-700'
+                      ? 'bg-linear-to-r from-cyan-500 to-cyan-400 text-white shadow-md shadow-cyan-500/20'
+                      : 'text-gray-600 hover:bg-cyan-50 hover:text-cyan-700'
                   }`
                 }
               >

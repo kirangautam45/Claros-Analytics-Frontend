@@ -8,25 +8,25 @@ interface BarChartData {
 interface SimpleBarChartProps {
   data: BarChartData[]
   title: string
-  color?: 'teal' | 'cyan' | 'emerald'
+  color?: 'cyan' | 'sky' | 'emerald'
   showRank?: boolean
   limit?: number
 }
 
 const colorConfig = {
-  teal: {
-    bar: 'bg-linear-to-r from-teal-400 via-teal-500 to-teal-600',
-    bg: 'bg-teal-100/50',
-    text: 'text-teal-600',
-    badge: 'bg-teal-500',
-    glow: 'shadow-teal-500/20',
-  },
   cyan: {
     bar: 'bg-linear-to-r from-cyan-400 via-cyan-500 to-cyan-600',
     bg: 'bg-cyan-100/50',
     text: 'text-cyan-600',
     badge: 'bg-cyan-500',
     glow: 'shadow-cyan-500/20',
+  },
+  sky: {
+    bar: 'bg-linear-to-r from-sky-400 via-sky-500 to-sky-600',
+    bg: 'bg-sky-100/50',
+    text: 'text-sky-600',
+    badge: 'bg-sky-500',
+    glow: 'shadow-sky-500/20',
   },
   emerald: {
     bar: 'bg-linear-to-r from-emerald-400 via-emerald-500 to-emerald-600',
@@ -47,7 +47,7 @@ const getRankIcon = (index: number) => {
 export function SimpleBarChart({
   data,
   title,
-  color = 'teal',
+  color = 'cyan',
   showRank = true,
   limit = 5,
 }: SimpleBarChartProps) {

@@ -65,9 +65,9 @@ export function ActivityTable({ activities }: ActivityTableProps) {
       return <ArrowUpDown className='w-3 h-3 text-gray-300 ml-1' />
     }
     return sortDirection === 'asc' ? (
-      <ChevronUp className='w-3.5 h-3.5 text-teal-500 ml-1' />
+      <ChevronUp className='w-3.5 h-3.5 text-cyan-500 ml-1' />
     ) : (
-      <ChevronDown className='w-3.5 h-3.5 text-teal-500 ml-1' />
+      <ChevronDown className='w-3.5 h-3.5 text-cyan-500 ml-1' />
     )
   }
 
@@ -95,10 +95,10 @@ export function ActivityTable({ activities }: ActivityTableProps) {
 
   return (
     <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300'>
-      <div className='px-5 sm:px-6 py-5 border-b border-gray-100 bg-linear-to-r from-teal-50 via-cyan-50 to-emerald-50'>
+      <div className='px-5 sm:px-6 py-5 border-b border-gray-100 bg-linear-to-r from-cyan-50 via-cyan-50 to-sky-50'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-3'>
-            <div className='p-2.5 bg-linear-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg shadow-teal-500/20'>
+            <div className='p-2.5 bg-linear-to-br from-cyan-500 to-cyan-600 rounded-xl shadow-lg shadow-cyan-500/20'>
               <Users className='w-5 h-5 text-white' />
             </div>
             <div>
@@ -110,7 +110,7 @@ export function ActivityTable({ activities }: ActivityTableProps) {
               </p>
             </div>
           </div>
-          <span className='text-xs font-semibold text-teal-600 bg-teal-100 px-3 py-1.5 rounded-full'>
+          <span className='text-xs font-semibold text-cyan-600 bg-cyan-100 px-3 py-1.5 rounded-full'>
             {activities.length} users
           </span>
         </div>
@@ -190,7 +190,7 @@ export function ActivityTable({ activities }: ActivityTableProps) {
               return (
                 <tr
                   key={activity.id}
-                  className='hover:bg-teal-50/50 transition-all duration-200 group'
+                  className='hover:bg-cyan-50/50 transition-all duration-200 group'
                 >
                   <td className='px-4 sm:px-6 py-4'>
                     <div className='flex items-center justify-center'>
@@ -204,12 +204,12 @@ export function ActivityTable({ activities }: ActivityTableProps) {
                   <td className='px-4 sm:px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div
-                        className='w-9 h-9 rounded-xl bg-linear-to-br from-teal-400 to-cyan-600
+                        className='w-9 h-9 rounded-xl bg-linear-to-br from-cyan-400 to-cyan-600
                           flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm'
                       >
                         {activity.name.charAt(0)}
                       </div>
-                      <span className='text-sm font-semibold text-gray-900 group-hover:text-teal-600 transition-colors'>
+                      <span className='text-sm font-semibold text-gray-900 group-hover:text-cyan-600 transition-colors'>
                         {activity.name}
                       </span>
                     </div>
@@ -220,7 +220,7 @@ export function ActivityTable({ activities }: ActivityTableProps) {
                     </span>
                   </td>
                   <td className='px-4 sm:px-6 py-4 text-center'>
-                    <span className='inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-teal-100 text-teal-700'>
+                    <span className='inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-100 text-cyan-700'>
                       {activity.posts}
                     </span>
                   </td>

@@ -4,7 +4,7 @@ import userReducer, {
   setCurrentPage,
   setItemsPerPage,
   clearError,
-} from './userSlice'
+} from '../userSlice'
 
 describe('userSlice', () => {
   const initialState = {
