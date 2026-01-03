@@ -27,11 +27,11 @@ export function DashboardHeader() {
   const now = new Date()
 
   return (
-    <div className='relative overflow-hidden bg-linear-to-br from-teal-600 via-teal-700 to-cyan-700 rounded-2xl p-5 sm:p-8 shadow-xl'>
+    <div className='relative overflow-hidden bg-linear-to-br from-cyan-600 via-cyan-700 to-sky-700 rounded-2xl p-5 sm:p-8 shadow-xl'>
       {/* Animated background shapes */}
       <div className='absolute inset-0 overflow-hidden'>
         <div className='absolute -top-10 -right-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-2xl animate-pulse' />
-        <div className='absolute -bottom-10 -left-10 w-32 h-32 bg-teal-400/20 rounded-full blur-2xl animate-pulse delay-700' />
+        <div className='absolute -bottom-10 -left-10 w-32 h-32 bg-cyan-400/20 rounded-full blur-2xl animate-pulse delay-700' />
         <div className='absolute top-1/2 left-1/2 w-24 h-24 bg-white/5 rounded-full blur-xl' />
       </div>
 
@@ -46,7 +46,7 @@ export function DashboardHeader() {
           <h1 className='text-2xl sm:text-3xl font-bold text-white tracking-tight'>
             {getGreeting()}!
           </h1>
-          <p className='text-teal-100/80 text-sm sm:text-base mt-2 max-w-md'>
+          <p className='text-cyan-100/80 text-sm sm:text-base mt-2 max-w-md'>
             Here&apos;s what&apos;s happening with your analytics today
           </p>
           <div className='flex flex-wrap items-center gap-3 sm:gap-4 mt-4'>
@@ -67,7 +67,7 @@ export function DashboardHeader() {
             <TrendingUp className='w-6 h-6 text-white' />
           </div>
           <div>
-            <p className='text-teal-100/70 text-xs font-medium'>Activity Status</p>
+            <p className='text-cyan-100/70 text-xs font-medium'>Activity Status</p>
             <p className='text-white text-lg font-bold'>All Systems Active</p>
           </div>
         </div>

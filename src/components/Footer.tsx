@@ -1,12 +1,12 @@
 export function Footer() {
   return (
-    <footer className='bg-linear-to-r from-teal-50 via-cyan-50 to-emerald-50 border-t border-gray-200 px-4 sm:px-6 py-5'>
+    <footer className='bg-linear-to-r from-cyan-50 via-cyan-50 to-sky-50 border-t border-gray-200 px-4 sm:px-6 py-5'>
       <div className='max-w-7xl mx-auto text-center'>
         <p className='text-sm font-semibold text-gray-800 animate-pulse'>
           Task Assignment for Frontend Developer Application
         </p>
         <p className='text-xs text-gray-500 mt-2 flex items-center justify-center gap-2 flex-wrap'>
-          <span className='inline-flex items-center gap-1 hover:text-teal-600 transition-colors duration-300'>
+          <span className='inline-flex items-center gap-1 hover:text-cyan-600 transition-colors duration-300'>
             Built with
           </span>
           <span className='inline-flex items-center gap-1.5'>
@@ -19,7 +19,7 @@ export function Footer() {
             <span className='px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-[10px] font-medium hover:bg-purple-200 transition-all duration-300 hover:scale-105'>
               Redux Toolkit
             </span>
-            <span className='px-2 py-0.5 bg-teal-100 text-teal-700 rounded-full text-[10px] font-medium hover:bg-teal-200 transition-all duration-300 hover:scale-105'>
+            <span className='px-2 py-0.5 bg-cyan-100 text-cyan-700 rounded-full text-[10px] font-medium hover:bg-cyan-200 transition-all duration-300 hover:scale-105'>
               Tailwind CSS
             </span>
           </span>

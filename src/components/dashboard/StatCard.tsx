@@ -4,23 +4,23 @@ interface StatCardProps {
   title: string
   value: number
   icon: ReactNode
-  color: 'teal' | 'cyan' | 'emerald' | 'amber' | 'slate'
+  color: 'cyan' | 'sky' | 'emerald' | 'amber' | 'slate'
 }
 
 const colorConfig = {
-  teal: {
-    bg: 'bg-white',
-    iconBg: 'bg-linear-to-br from-teal-500 to-teal-600',
-    iconShadow: 'shadow-teal-500/30',
-    accent: 'text-teal-600',
-    bar: 'bg-linear-to-r from-teal-400 to-teal-600',
-  },
   cyan: {
     bg: 'bg-white',
     iconBg: 'bg-linear-to-br from-cyan-500 to-cyan-600',
     iconShadow: 'shadow-cyan-500/30',
     accent: 'text-cyan-600',
     bar: 'bg-linear-to-r from-cyan-400 to-cyan-600',
+  },
+  sky: {
+    bg: 'bg-white',
+    iconBg: 'bg-linear-to-br from-sky-500 to-sky-600',
+    iconShadow: 'shadow-sky-500/30',
+    accent: 'text-sky-600',
+    bar: 'bg-linear-to-r from-sky-400 to-sky-600',
   },
   emerald: {
     bg: 'bg-white',

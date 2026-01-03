@@ -87,13 +87,13 @@ export function DashboardPage() {
               title='Total Users'
               value={stats?.totalUsers || 0}
               icon={<Users className='w-5 h-5' />}
-              color='teal'
+              color='cyan'
             />
             <StatCard
               title='Total Posts'
               value={stats?.totalPosts || 0}
               icon={<FileText className='w-5 h-5' />}
-              color='cyan'
+              color='sky'
             />
             <StatCard
               title='Comments'
@@ -121,7 +121,7 @@ export function DashboardPage() {
             <SimpleBarChart
               data={postsPerUser.map((u) => ({ name: u.name, value: u.posts }))}
               title='Top Users by Posts'
-              color='teal'
+              color='cyan'
             />
 
             {/* Todo Completion Rate */}
@@ -169,7 +169,7 @@ export function DashboardPage() {
                 value: u.completed,
               }))}
               title='Top Users by Completions'
-              color='cyan'
+              color='sky'
             />
           </div>
 
