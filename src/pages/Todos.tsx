@@ -9,6 +9,7 @@ import {
   setTodoFilter,
   clearTodoError,
 } from '@/store/slices/todoSlice'
+import { fetchUsers } from '@/store/slices/userSlice'
 import { useDebounce } from '@/hooks/useDebounce'
 import { CheckCircle2, XCircle } from 'lucide-react'
 
@@ -30,7 +31,10 @@ export function TodosPage() {
     if (todos.length === 0) {
       dispatch(fetchTodos())
     }
-  }, [dispatch, todos.length])
+    if (users.length === 0) {
+      dispatch(fetchUsers())
+    }
+  }, [dispatch, todos.length, users.length])
 
   const stats = useMemo(() => {
     const total = todos.length
@@ -168,7 +172,7 @@ export function TodosPage() {
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                       Task
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-32">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider min-w-36">
                       Status
                     </th>
                   </tr>
@@ -190,7 +194,7 @@ export function TodosPage() {
                         <td className={`px-6 py-4 text-sm ${todo.completed ? 'text-gray-400 line-through' : 'text-gray-900'}`}>
                           {todo.title}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 whitespace-nowrap">
                           <span
                             className={`inline-flex items-center gap-1.5 text-sm font-medium ${
                               todo.completed ? 'text-green-600' : 'text-orange-500'
@@ -199,12 +203,12 @@ export function TodosPage() {
                             {todo.completed ? (
                               <>
                                 <CheckCircle2 className="w-4 h-4" />
-                                Completed
+                                <span className="hidden sm:inline">Completed</span>
                               </>
                             ) : (
                               <>
                                 <XCircle className="w-4 h-4" />
-                                Pending
+                                <span className="hidden sm:inline">Pending</span>
                               </>
                             )}
                           </span>
